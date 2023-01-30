@@ -1,45 +1,43 @@
-# wirebot for UNIX
+# wire for UNIX
 
 ## Introduction
 
-wirebot is a command line client for the Wired 2.0 + 2.5 protocol.
+wire is a command line client for the Wired 2.0 + 2.5 protocol.
 
-This is the former CLI client "wire" (https://github.com/nark/wire) which has now been extended with bot functions by me. It is controlled via bash. See the file "wirebot.sh" (which must be located in the ~/.wirebot folder) for details.
+## Install wire (UNIX-like systems)
 
-## Install wirebot (UNIX-like systems)
-
-This tutorial explains how to install and run wirebot on an UNIX-like operating system.
+This tutorial explains how to install and run wire on an UNIX-like operating system.
 
 ### Howto install on:
 
 **Ubuntu/Debian10 and higher only**
 
-	sudo apt-get install -y curl build-essential autoconf screen inotify-tools git libxml2-dev libssl-dev zlib1g-dev libreadline-dev libcurl4-gnutls-dev
+	sudo apt-get install -y build-essential autoconf git libxml2-dev libssl-dev zlib1g-dev libreadline-dev libcurl4-gnutls-dev
 
 **Fedora**
 	
-	sudo yum -y install curl screen git libtool openssl-devel sqlite-devel libxml2-devel zlib-devel readline-devel libcurl-devel autoconf gcc make inotify-tools
+	sudo yum -y install git libtool openssl-devel sqlite-devel libxml2-devel zlib-devel readline-devel libcurl-devel autoconf gcc make
 
 **CentOS**
 
 	sudo yum install epel-release
-	sudo yum -y install curl screen git libtool openssl-devel sqlite-devel libxml2-devel zlib-devel readline-devel libcurl-devel autoconf gcc make inotify-tools
+	sudo yum -y install git libtool openssl-devel sqlite-devel libxml2-devel zlib-devel readline-devel libcurl-devel autoconf gcc make
 
 **openSUSE**
 
-	sudo zypper install curl screen libtool libopenssl-devel sqlite3-devel libxml2-devel zlib-devel readline-devel libcurl-devel autoconf gcc make inotify-tools
+	sudo zypper install libtool libopenssl-devel sqlite3-devel libxml2-devel zlib-devel readline-devel libcurl-devel autoconf gcc make
 	
 ### Getting started
 
-Installing wirebot from sources will be done using the Autotools standard (configure, make, make install).
+Installing wire from sources will be done using the Autotools standard (configure, make, make install).
 
-##### 1. Get wirebot sources via Terminal:
+##### 1. Get wire sources via Terminal:
 
-	git clone https://github.com/ProfDrLuigi/wirebot
+	git clone https://github.com/ProfDrLuigi/wire
 
-Then move to the `wirebot` directory:
+Then move to the `wire` directory:
 
-	cd wirebot/
+	cd wire/
 
 Initialize and update submodules repositories:
 
@@ -56,7 +54,7 @@ To start configuration, use the following command:
 
 	./configure
 
-wirebot is designed to be installed into `/usr/local/bin` by default. To change this, run:
+wire is designed to be installed into `/usr/local/bin` by default. To change this, run:
 
 	./configure --prefix=/path	
 
@@ -71,35 +69,20 @@ This will require write permissions to `/usr/local/bin`, or whatever directory y
 ##### 4. Compile and install Binary
 	make
 	sudo make install
-	mkdir ~/.wirebot
-	cp wirebot.sh rss.sh config ~/.wirebot
-	chmod +x ~/.wirebot/wirebot.sh
-
-Don't forget to put your credentials into ~/.wirebot/config before you start the bot the first time.
-
-##### 5. Running wirebot (runs in a screen session)
-
-To start the installed wirebot, run:
-
-	/usr/local/bin/wirebot/./wirebotctl start
-
-You can inject any Text from any script to the session this way:
 	
-	screen -S wirebot -p0 -X stuff "Hello world!"^M
+Don't forget to put your credentials into ~/.wire/config before you start the bot the first time.
 
-To enter the running screen session simply type:
-	
-	/usr/local/bin/./wirebotctl screen
-	
-To leave the session (not closing!) type:
+##### 5. Running wire
 
-	ctrl + a and than d
+To start the installed wire, run:
+
+	/usr/local/bin/./wire
 
 ##### 6. Configuration
 
 Default path for the configuration file is:
 
-	~/.wirebot/config
+	~/.wire/config
 	
 Example configuration:
 
@@ -107,50 +90,15 @@ Example configuration:
 	open -l USER -p PASSWORT -P PORT URL
 	nick YOUR_NAME
 	status YOUR_STATUS
-	icon /home/YOUR_USER/.wirebot/PICTURE.png
+	icon /home/YOUR_USER/.wire/PICTURE.png
 	
-If you want to know the available commands of the wirebot type
+If you want to know the available commands of the wire type
 
 	/help
 	
 in the Chat Main window.
 
 If you got/send a msg you can cycle through the windows with:
-
-	ctrl+n / ctrl+p
-
-#### 7. Control wirebot:
-
-	Usage:  wirebotctl [COMMAND]
-
-	COMMAND:
-	start			Start wirebot
-	stop			Stop wirebot
-	restart			Restart wirebot
-	screen			Join screen session (To exit session press ctrl+a and than d)
-	watch/nowatch		Switch filewatching on/off
-	status			Show the status
-	config			Show the configuration
-	
-	join_on			Activate greeting if user joined server
-	join_off		Deactivate greeting if user joined server
-	
-	leave_on		Activate greeting if user leaved server
-	leave_off		Deactivate greeting if user leaved server
-
-	wordfilter_on		Activate wordfilter
-	wordfilter_off		Deactivate wordfilfter
-	
-	common_reply_on		Activate talkativeness
-	common_reply_off	Deactivate talkativeness	
-	
-	rssfeed_on		Activate RSS Newsfeed
-	rssfeed_off		Deactivate RSS Newsfeed
-
-By Prof. Dr. Luigi 
-Original by Rafaël Warnault <dev@read-write.fr>
-
-If you want to extent the wirebot with functions you can edit wirebot.sh in your .wirebot Directory.
 
 ### Troubleshootings
 
