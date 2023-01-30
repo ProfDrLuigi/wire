@@ -29,6 +29,8 @@
 #include "config.h"
 
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include <readline/readline.h>
 #include <wired/wired.h>
 
@@ -406,20 +408,29 @@ void wr_printf(wi_string_t *fmt, ...) {
 
 
 
-void wr_wprintf(wr_window_t *window, wi_string_t *fmt, ...) {
-	wi_string_t		*string;
-	va_list			ap;
+void wr_wprintf(wr_window_t *window, wi_string_t *fmt, ...)
+{
+	wi_string_t *string;
+	va_list ap;
 
 	va_start(ap, fmt);
+
 	string = wi_string_init_with_format_and_arguments(wi_string_alloc(), fmt, ap);
 	va_end(ap);
 
-	wr_wprint(window, string);
-	
-	wi_release(string);
+	// Checks if input is an image and it will be not printed in wire(bot) to not mess
+	// up the chat window
+	char *sent = (wi_string_cstring(string));
+	char *word = "data:image";
+
+	char *pch = strstr(sent, word);
+
+	if (!pch)
+	{
+		wr_wprint(window, string);
+		wi_release(string);
+	}
 }
-
-
 
 void wr_printf_prefix(wi_string_t *fmt, ...) {
 	wi_string_t		*string;
